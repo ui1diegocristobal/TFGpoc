@@ -1,8 +1,8 @@
 # Data haciendo una consulta de que tipo de instancia asignaremos a los nodos del cluster
-data "civo_size" "xsmall" {
+data "civo_size" "instance" {
     filter {
         key = "name"
-        values = ["xsmall"]
+        values = [var.instance_type]
         match_by = "re"
     }
 

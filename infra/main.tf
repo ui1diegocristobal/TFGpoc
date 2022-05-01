@@ -17,10 +17,10 @@ resource "civo_firewall_rule" "kubernetes" {
 
 # Crea un cluster en CIVO
 resource "civo_kubernetes_cluster" "main-cluster" {
-    name = "tfg-cluster"
+    name = var.cluster_name
     firewall_id = civo_firewall.my-firewall.id
     pools {
-        size = element(data.civo_size.xsmall.sizes, 0).name
+        size = element(data.civo_size.instance.sizes, 0).name
         node_count = 3
     }
 }

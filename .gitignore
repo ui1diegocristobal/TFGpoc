@@ -15,3 +15,4 @@
 # vendor/
 
 change_git_user.sh
+.terraform/
