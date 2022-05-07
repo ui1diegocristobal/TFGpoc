@@ -17,3 +17,4 @@
 change_git_user.sh
 .terraform/
 .Makefile*
+.vscode*
