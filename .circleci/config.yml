@@ -26,8 +26,16 @@ jobs:
 workflows:
   Example-Workflow:
     jobs:
-      - plan-tf-ci
+      - plan-tf-ci:
+          filters:
+              branches:
+                only:
+                  - master
       - apply-tf-ci:
           requires:
             - plan-tf-ci
             - Hold-for-Approval
+          filters:
+              branches:
+                only:
+                  - master
