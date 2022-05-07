@@ -1,0 +1,33 @@
+version: 2.1
+jobs:
+  plan-tf-ci:
+    working_directory: /tmp/project
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    steps:
+      - checkout
+      - run:
+          name: terraform init & plan
+          command: |
+            make plan-infra
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  apply-tf-ci:
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    steps:
+      - run:
+          name: terraform apply
+          command: |
+            make apply-infra
+
+workflows:
+  Example-Workflow:
+    jobs:
+      - plan-tf-ci
+      - apply-tf-ci:
+          requires:
+            - plan-tf-ci
+            - Hold-for-Approval
