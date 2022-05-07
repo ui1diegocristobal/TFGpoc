@@ -32,9 +32,9 @@ workflows:
                 only:
                   - master
       - apply-tf-ci:
+          type: approval
           requires:
             - plan-tf-ci
-            - Hold-for-Approval
           filters:
               branches:
                 only:
