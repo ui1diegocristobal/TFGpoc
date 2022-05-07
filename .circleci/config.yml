@@ -11,10 +11,6 @@ jobs:
           command: |
             apk add make
             make plan-infra
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
   apply-tf-ci:
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
@@ -26,7 +22,7 @@ jobs:
             make apply-infra
 
 workflows:
-  Example-Workflow:
+  terraform:
     jobs:
       - plan-tf-ci:
           filters:
@@ -35,8 +31,6 @@ workflows:
                   - master
       - apply-tf-ci:
           type: approval
-          requires:
-            - plan-tf-ci
           filters:
               branches:
                 only:
