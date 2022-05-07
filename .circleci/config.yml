@@ -30,8 +30,10 @@ workflows:
                 only:
                   - master
       - apply-tf-ci:
-          type: approval
           filters:
               branches:
                 only:
                   - master
+          type: approval
+          requires:
+            - plan-tf-ci
