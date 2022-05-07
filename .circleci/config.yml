@@ -9,6 +9,7 @@ jobs:
       - run:
           name: terraform init & plan
           command: |
+            apk add make
             make plan-infra
       - persist_to_workspace:
           root: .
@@ -21,6 +22,7 @@ jobs:
       - run:
           name: terraform apply
           command: |
+            apk add make
             make apply-infra
 
 workflows:
