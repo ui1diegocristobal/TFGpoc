@@ -7,3 +7,6 @@ plan-infra:
 
 apply-infra: plan-infra
 	@cd infra && terraform apply -auto-approve
+
+terratest:
+	@cd _test && go test -v kubernetes_test.go
