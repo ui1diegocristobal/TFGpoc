@@ -54,17 +54,13 @@ workflows:
               branches:
                 only:
                   - master
-      - hold-apply:
-          type: approval
-          requires:
-            - plan-tf-ci
       - apply-tf-ci:
           filters:
               branches:
                 only:
                   - master
           requires:
-            - hold-apply
+            - plan-tf-ci
       - test-service:
           filters:
               branches:
