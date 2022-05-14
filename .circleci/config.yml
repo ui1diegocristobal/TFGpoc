@@ -22,9 +22,18 @@ jobs:
           command: |
             apk add make
             make apply-infra
-
+  
+  test-service:
+    docker:
+      - image: cimg/go:1.18.2
+    steps:
+      - checkout
+      - run:
+          name: terratest
+          command: |
+            make terratest
 workflows:
-  terraform:
+  terraform-deploy:
     jobs:
       - plan-tf-ci:
           filters:
@@ -42,3 +51,10 @@ workflows:
                   - master
           requires:
             - hold-apply
+  test-kubernetes:
+    jobs:
+      - test-service:
+          filters:
+              branches:
+                only:
+                  - master
