@@ -5,5 +5,5 @@ endif
 plan-infra:
 	@cd infra && terraform init && terraform plan
 
-apply-infra:
+apply-infra: plan-infra
 	@cd infra && terraform apply -auto-approve
