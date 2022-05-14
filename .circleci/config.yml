@@ -56,8 +56,6 @@ workflows:
                   - master
           requires:
             - hold-apply
-  test-kubernetes:
-    jobs:
       - test-service:
           filters:
               branches:
