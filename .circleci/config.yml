@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  plan-tf-ci:
+  plan-apply-tf:
     working_directory: /tmp/project
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
@@ -11,11 +11,6 @@ jobs:
           command: |
             apk add make
             make plan-infra
-  apply-tf-ci:
-    docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
-    steps:
-      - checkout
       - run:
           name: terraform apply
           command: |
@@ -25,16 +20,9 @@ jobs:
 workflows:
   terraform:
     jobs:
-      - plan-tf-ci:
-          filters:
-              branches:
-                only:
-                  - master
-      - apply-tf-ci:
+      - plan-apply-tf:
           filters:
               branches:
                 only:
                   - master
           type: approval
-          requires:
-            - plan-tf-ci
