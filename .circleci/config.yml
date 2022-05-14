@@ -22,6 +22,12 @@ jobs:
           command: |
             apk add make
             make apply-infra
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # taken to be the root directory of the workspace.
+          root: workspace
+          paths: 
+            - .
   
   test-service:
     docker:
@@ -37,6 +43,9 @@ jobs:
           name: terratest
           command: |
             make terratest
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: .
 workflows:
   terraform-deploy:
     jobs:
