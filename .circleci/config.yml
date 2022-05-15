@@ -46,8 +46,24 @@ jobs:
           name: terratest
           command: |
             make terratest
+  install-flux:
+    docker:
+      - image: ghcr.io/fluxcd/flux-cli:latest
+    steps:
+      - checkout
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: .
+      - run:
+          name: kubeconfig
+          command: |
+            mv infra/kubeconfig ~/.kube/config
+      - run:
+          name: bootstrap-flux
+          command: |
+            flux bootstrap github --owner=ui1diegocristobal --repository=TFGpoc --path=app --personal
 workflows:
-  terraform-deploy:
+  cluster-deploy:
     jobs:
       - plan-tf-ci:
           filters:
@@ -68,3 +84,10 @@ workflows:
                   - master
           requires:
             - apply-tf-ci
+      - install-flux:
+          filters:
+              branches:
+                only:
+                  -master
+          requires:
+            - test-service
