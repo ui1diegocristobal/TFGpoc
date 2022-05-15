@@ -46,6 +46,12 @@ jobs:
           name: terratest
           command: |
             make terratest
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # taken to be the root directory of the workspace.
+          root: .
+          paths: 
+            - .
   install-flux:
     docker:
       - image: ghcr.io/fluxcd/flux-cli:v0.17.0
