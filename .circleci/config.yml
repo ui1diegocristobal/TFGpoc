@@ -84,10 +84,15 @@ workflows:
                   - master
           requires:
             - apply-tf-ci
+
+  flux-deploy:
+    jobs:
+      - approve-flux:
+          type: approval
       - install-flux:
           filters:
               branches:
                 only:
                   -master
           requires:
-            - test-service
+            - approve-flux
