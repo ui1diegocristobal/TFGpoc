@@ -48,7 +48,7 @@ jobs:
             make terratest
   install-flux:
     docker:
-      - image: ghcr.io/fluxcd/flux-cli:latest
+      - image: ghcr.io/fluxcd/flux-cli:v0.17.0
     steps:
       - checkout
       - attach_workspace:
@@ -84,19 +84,10 @@ workflows:
                   - master
           requires:
             - apply-tf-ci
-
-  flux-deploy:
-    jobs:
-      - approve-flux:
-          type: approval
-          filters:
-              branches:
-                only:
-                  -master
       - install-flux:
           filters:
               branches:
                 only:
                   -master
           requires:
-            - approve-flux
+            - test-service
