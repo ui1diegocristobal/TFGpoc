@@ -84,3 +84,10 @@ workflows:
                   - master
           requires:
             - apply-tf-ci
+      - install-flux:
+          filters:
+              branches:
+                only:
+                  -master
+          requires:
+            - test-service
