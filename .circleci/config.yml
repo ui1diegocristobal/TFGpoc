@@ -54,7 +54,7 @@ jobs:
             - .
   install-flux:
     docker:
-      - image: ghcr.io/fluxcd/flux-cli:v0.17.0
+      - image: ghcr.io/fluxcd/flux-cli:v0.30.2
     steps:
       - checkout
       - attach_workspace:
@@ -63,6 +63,7 @@ jobs:
       - run:
           name: kubeconfig
           command: |
+            mkdir ~/.kube
             mv infra/kubeconfig ~/.kube/config
       - run:
           name: bootstrap-flux
