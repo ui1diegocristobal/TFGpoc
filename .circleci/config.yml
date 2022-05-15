@@ -89,6 +89,10 @@ workflows:
     jobs:
       - approve-flux:
           type: approval
+          filters:
+              branches:
+                only:
+                  -master
       - install-flux:
           filters:
               branches:
