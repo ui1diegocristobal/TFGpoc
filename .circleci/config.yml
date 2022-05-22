@@ -86,10 +86,9 @@ workflows:
                   - master
           requires:
             - apply-tf-ci
+  install-flux:
+    jobs:
       - install-flux:
           filters:
-              branches:
-                only:
-                  - master
-          requires:
-            - test-service
+            tags:
+              only: /^flux-.*/
