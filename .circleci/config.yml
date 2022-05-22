@@ -92,3 +92,5 @@ workflows:
           filters:
             tags:
               only: /^flux-.*/
+            branches:
+              ignore: /.*/
