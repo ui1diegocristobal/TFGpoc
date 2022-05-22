@@ -86,8 +86,6 @@ workflows:
                   - master
           requires:
             - apply-tf-ci
-  install-flux:
-    jobs:
       - install-flux:
           filters:
             tags:
