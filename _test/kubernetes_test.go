@@ -30,10 +30,10 @@ func TestKubernetes(t *testing.T) {
 	k8s.KubectlApply(t, options, kubeResourcePath)
 
 	// website::tag::4:: Verify the service is available and get the URL for it.
-	k8s.WaitUntilServiceAvailable(t, options, "hello-world-service", 10, 1*time.Second)
+	k8s.WaitUntilServiceAvailable(t, options, "hello-world-service", 15, 1*time.Second)
 	service := k8s.GetService(t, options, "hello-world-service")
 	url := fmt.Sprintf("http://%s", k8s.GetServiceEndpoint(t, options, service, 5000))
 
 	// website::tag::5:: Make an HTTP request to the URL and make sure it returns a 200 OK with the body "Hello, World".
-	http_helper.HttpGetWithRetry(t, url, nil, 200, "Hello world!", 15, 60*time.Second)
+	http_helper.HttpGetWithRetry(t, url, nil, 200, "Hello world!", 20, 60*time.Second)
 }
