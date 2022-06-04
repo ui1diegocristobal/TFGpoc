@@ -51,14 +51,10 @@ jobs:
       - image: ghcr.io/fluxcd/flux-cli:v0.17.0
     steps:
       - checkout
-      - attach_workspace:
-          # Must be absolute path or relative path from working_directory
-          at: .
       - run:
           name: kubeconfig
           command: |
-            mkdir ~/.kube
-            mv infra/kubeconfig ~/.kube/config
+            bash scripts/kubeconfig.sh
       - run:
           name: bootstrap-flux
           command: |
