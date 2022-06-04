@@ -17,7 +17,7 @@ preferences: {}
 users:
 - name: cluster_tf
   user:
-    client-certificate-data: $CERT_DATA
+    client-certificate-data: $CLIENT_DATA
     client-key-data: $KEY_DATA
 EOF
 echo "${KUBECONFIG}" > ~/.kube/config
