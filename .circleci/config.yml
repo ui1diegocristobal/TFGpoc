@@ -60,7 +60,7 @@ jobs:
           command: |
             mkdir ~/.kube
             chmod +x scripts/kubeconfig.sh
-            sh scripts/kubeconfig.sh
+            bash scripts/kubeconfig.sh
       - run:
           name: bootstrap-flux
           command: |
