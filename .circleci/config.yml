@@ -48,9 +48,13 @@ jobs:
             make terratest
   install-flux:
     docker:
-      - image: ghcr.io/fluxcd/flux-cli:v0.30.0
+      - image: cimg/base:2022.05
     steps:
       - checkout
+      - run:
+          name: fluxctl
+          command: |
+            curl -s https://fluxcd.io/install.sh | sudo bash
       - run:
           name: kubeconfig
           command: |
