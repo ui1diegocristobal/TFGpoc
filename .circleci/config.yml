@@ -60,7 +60,7 @@ jobs:
       - run:
           name: bootstrap-flux
           command: |
-            flux bootstrap github --owner=ui1diegocristobal --repository=TFGpoc --path=app --branch=master
+            flux bootstrap github --owner=ui1diegocristobal --repository=TFGpoc --path=app --branch=master --personal
 
 workflows:
   cluster-deploy:
