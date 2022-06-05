@@ -1,4 +1,5 @@
 version: 2.1
+run-build: true
 jobs:
   plan-tf-ci:
     working_directory: /tmp/project
