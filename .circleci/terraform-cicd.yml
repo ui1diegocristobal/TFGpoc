@@ -4,7 +4,7 @@ parameters:
   run-build:
     type: boolean
     default: false
-    description: "Run build"
+    description: "Enable terraform deploy and tests"
 
 jobs:
   plan-tf-ci:
