@@ -26,7 +26,7 @@ workflows:
   flows:
     jobs:
       - path-filtering/filter:
-          base-revision: << pipeline.git.branch >>
+          base-revision: master
           config-path: .circleci/terraform-cicd.yml
           mapping: |
             infra/.* run-build true
