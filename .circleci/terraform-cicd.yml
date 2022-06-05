@@ -1,5 +1,11 @@
 version: 2.1
-run-build: true
+
+parameters:
+  run-build:
+    type: boolean
+    default: false
+    description: "Run build"
+
 jobs:
   plan-tf-ci:
     working_directory: /tmp/project
