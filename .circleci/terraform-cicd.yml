@@ -1,0 +1,77 @@
+version: 2.1
+
+parameters:
+  run-build:
+    type: boolean
+    default: false
+    description: "Enable terraform deploy and tests"
+
+jobs:
+  plan-tf-ci:
+    working_directory: /tmp/project
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    steps:
+      - checkout
+      - run:
+          name: terraform init & plan
+          command: |
+            apk add make
+            make plan-infra
+
+  apply-tf-ci:
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    steps:
+      - checkout
+      - run:
+          name: terraform apply
+          command: |
+            apk add make
+            make apply-infra
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # taken to be the root directory of the workspace.
+          root: .
+          paths: 
+            - .
+  
+  test-service:
+    docker:
+      - image: cimg/go:1.18.2
+    steps:
+      - checkout
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: .
+      - run:
+          name: kubectl
+          command: |
+            curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+            sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+      - run:
+          name: terratest
+          command: |
+            make terratest
+workflows:
+  cluster-deploy:
+    jobs:
+      - plan-tf-ci:
+          filters:
+              branches:
+                only:
+                  - master
+      - apply-tf-ci:
+          filters:
+              branches:
+                only:
+                  - master
+          requires:
+            - plan-tf-ci
+      - test-service:
+          filters:
+              branches:
+                only:
+                  - master
+          requires:
+            - apply-tf-ci
