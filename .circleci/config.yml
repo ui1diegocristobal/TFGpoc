@@ -26,10 +26,10 @@ workflows:
   flows:
     jobs:
       - path-filtering/filter:
-          base-revision: master
+          base-revision: << pipeline.git.branch >>
           config-path: .circleci/terraform-cicd.yml
           mapping: |
-            /^infra.*/
+            infra/.* run-build true
       - install-flux:
           filters:
             tags:
