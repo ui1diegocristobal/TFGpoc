@@ -29,7 +29,7 @@ workflows:
           base-revision: master
           config-path: .circleci/terraform-cicd.yml
           mapping: |
-            infra/.*
+            /^infra.*/
       - install-flux:
           filters:
             tags:
