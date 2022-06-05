@@ -24,15 +24,13 @@ jobs:
             flux bootstrap github --owner=ui1diegocristobal --repository=TFGpoc --path=app --branch=master --personal
 
 workflows:
-  terraform-cicd:
+  full-flow:
     jobs:
       - path-filtering/filter:
           base-revision: master
           config-path: .circleci/terraform-cicd.yml
           mapping: |
             infra/.* run-build true
-  flux-deploy:
-    jobs:
       - install-flux:
           filters:
             tags:
