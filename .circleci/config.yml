@@ -49,8 +49,6 @@ workflows:
               only: /^flux-.*/
             branches:
               ignore: /.*/
-  build-app:
-    jobs:
       - buildpacks/build:
           builder: 'gcr.io/buildpacks/builder:v1 '
           image-file: webapp-poc.tgz
