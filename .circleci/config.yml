@@ -30,10 +30,9 @@ jobs:
           at: /tmp/workspace
       - run:
           command: |
-            TAG=1.0.$CIRCLE_BUILD_NUM
             echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
             docker load -i /tmp/workspace/images/webapp-poc.tgz
-            docker push ui1dcristobaltfg/webapp-poc:$TAG
+            docker push ui1dcristobaltfg/webapp-poc:$CIRCLE_TAG
 
 workflows:
   full-flow:
@@ -52,18 +51,17 @@ workflows:
       - buildpacks/build:
           builder: 'gcr.io/buildpacks/builder:v1'
           image-file: webapp-poc.tgz
-          image-name: webapp-poc
-          tags: 1.0.$CIRCLE_BUILD_NUM
+          image-name: webapp-poc:$CIRCLE_TAG
           working-directory: app/src
           filters:
             tags:
-              only: /^webapp-.*/
+              only: /^v*/
             branches:
               ignore: /.*/
       - push-image:
           filters:
             tags:
-              only: /^webapp-.*/
+              only: /^v*/
             branches:
               ignore: /.*/
           requires:
