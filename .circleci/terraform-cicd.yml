@@ -55,23 +55,18 @@ jobs:
             make terratest
 workflows:
   cluster-deploy:
+    when:
+    or: 
+      - << pipeline.parameters.run-build >>
+    filters:
+        branches:
+          only:
+            - master
     jobs:
-      - plan-tf-ci:
-          filters:
-              branches:
-                only:
-                  - master
+      - plan-tf-ci
       - apply-tf-ci:
-          filters:
-              branches:
-                only:
-                  - master
           requires:
             - plan-tf-ci
       - test-service:
-          filters:
-              branches:
-                only:
-                  - master
           requires:
             - apply-tf-ci
