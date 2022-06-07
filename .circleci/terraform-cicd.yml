@@ -57,21 +57,15 @@ workflows:
   cluster-deploy:
     jobs:
       - plan-tf-ci:
-          filters:
-              branches:
-                only:
-                  - master
+          when: 
+              - << pipeline.parameters.run-build >>
       - apply-tf-ci:
-          filters:
-              branches:
-                only:
-                  - master
+          when: 
+              - << pipeline.parameters.run-build >>
           requires:
             - plan-tf-ci
       - test-service:
-          filters:
-              branches:
-                only:
-                  - master
+          when: 
+              - << pipeline.parameters.run-build >>
           requires:
             - apply-tf-ci
