@@ -56,7 +56,7 @@ jobs:
 workflows:
   cluster-deploy:
     when: 
-            - << pipeline.parameters.run-build >>
+      - << pipeline.parameters.run-build >>
     jobs:
       - plan-tf-ci:
           filters:
