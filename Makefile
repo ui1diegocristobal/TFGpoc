@@ -10,3 +10,6 @@ apply-infra: plan-infra
 
 terratest:
 	@cd _test && go test -v kubernetes_test.go
+
+build-image:
+	@pack build webapp:v1.0.0 --path app/src --builder gcr.io/buildpacks/builder:v1
