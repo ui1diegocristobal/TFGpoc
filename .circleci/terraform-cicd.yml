@@ -55,7 +55,8 @@ jobs:
             make terratest
 workflows:
   cluster-deploy:
-    when: 
+    when:
+    or: 
       - << pipeline.parameters.run-build >>
     filters:
         branches:
