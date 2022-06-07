@@ -2,6 +2,7 @@ version: 2.1
 setup: true
 orbs:
   path-filtering: circleci/path-filtering@0.1.3
+  buildpacks: buildpacks/pack@0.2.4
 jobs:
   install-flux:
     docker:
@@ -22,6 +23,18 @@ jobs:
           name: bootstrap-flux
           command: |
             flux bootstrap github --owner=ui1diegocristobal --repository=TFGpoc --path=app --branch=master --personal
+  push-image:
+    machine: true
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          command: |
+            echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+            docker load -i /tmp/workspace/images/webapp-poc.tgz
+            docker tag webapp-poc:latest ui1dcristobaltfg/webapp-poc:latest
+            docker tag webapp-poc:latest ui1dcristobaltfg/webapp-poc:$CIRCLE_TAG
+            docker push --all-tags ui1dcristobaltfg/webapp-poc
 
 workflows:
   full-flow:
@@ -37,3 +50,21 @@ workflows:
               only: /^flux-.*/
             branches:
               ignore: /.*/
+      - buildpacks/build:
+          builder: 'gcr.io/buildpacks/builder:v1'
+          image-file: webapp-poc.tgz
+          image-name: webapp-poc:latest
+          working-directory: app/src
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - push-image:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+          requires:
+            - buildpacks/build
