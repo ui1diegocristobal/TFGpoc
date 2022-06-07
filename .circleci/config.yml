@@ -55,13 +55,13 @@ workflows:
           working-directory: app/src
           filters:
             tags:
-              only: /^v*/
+              only: /^v.*/
             branches:
               ignore: /.*/
       - push-image:
           filters:
             tags:
-              only: /^v*/
+              only: /^v.*/
             branches:
               ignore: /.*/
           requires:
