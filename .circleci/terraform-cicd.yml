@@ -58,14 +58,14 @@ workflows:
     jobs:
       - plan-tf-ci:
           when: 
-              - << pipeline.parameters.run-build >>
+            - << pipeline.parameters.run-build >>
       - apply-tf-ci:
           when: 
-              - << pipeline.parameters.run-build >>
+            - << pipeline.parameters.run-build >>
           requires:
             - plan-tf-ci
       - test-service:
           when: 
-              - << pipeline.parameters.run-build >>
+            - << pipeline.parameters.run-build >>
           requires:
             - apply-tf-ci
