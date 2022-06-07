@@ -23,7 +23,7 @@ jobs:
           name: bootstrap-flux
           command: |
             flux bootstrap github --owner=ui1diegocristobal --repository=TFGpoc --path=app --branch=master --personal
-  build-image:
+  push-image:
     machine: true
     steps:
       - attach_workspace:
@@ -62,6 +62,6 @@ workflows:
               only: /^webapp-.*/
             branches:
               ignore: /.*/
-      - publish:
+      - push-image:
           requires:
             - buildpacks/build
