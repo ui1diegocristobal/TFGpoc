@@ -61,5 +61,10 @@ workflows:
             branches:
               ignore: /.*/
       - push-image:
+          filters:
+            tags:
+              only: /^webapp-.*/
+            branches:
+              ignore: /.*/
           requires:
             - buildpacks/build
