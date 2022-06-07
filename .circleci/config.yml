@@ -51,7 +51,8 @@ workflows:
       - buildpacks/build:
           builder: 'gcr.io/buildpacks/builder:v1'
           image-file: webapp-poc.tgz
-          image-name: webapp-poc:$CIRCLE_TAG
+          image-name: webapp-poc:latest
+          tags: $CIRCLE_TAG
           working-directory: app/src
           filters:
             tags:
