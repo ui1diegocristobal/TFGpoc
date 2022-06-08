@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: ./charts/staging/webapp
-      version: 2.1.2
+      version: 2.1.3
       sourceRef:
         kind: GitRepository
         name: webapp-staging
