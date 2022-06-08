@@ -1,0 +1,17 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: webapp-staging
+  namespace: staging
+spec:
+  interval: 1m0s
+  ref:
+    branch: master
+  secretRef:
+    name: flux-system
+  url: ssh://git@github.com/ui1diegocristobal/TFGpoc/charts/staging
+  ignore: |
+    # exclude all
+    /*
+    # include charts directory
+    !/webapp/    
