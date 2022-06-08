@@ -9,9 +9,9 @@ spec:
     branch: master
   secretRef:
     name: flux-system
-  url: ssh://git@github.com/ui1diegocristobal/TFGpoc/charts/prod
+  url: ssh://git@github.com/ui1diegocristobal/TFGpoc
   ignore: |
     # exclude all
     /*
     # include charts directory
-    !/webapp/    
+    !/charts/prod/webapp/    
