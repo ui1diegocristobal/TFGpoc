@@ -32,7 +32,6 @@ jobs:
           command: |
             echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
             docker load -i /tmp/workspace/images/webapp-poc.tgz
-            docker tag webapp-poc:latest ui1dcristobaltfg/webapp-poc:latest
             docker tag webapp-poc:latest ui1dcristobaltfg/webapp-poc:$CIRCLE_TAG
             docker push --all-tags ui1dcristobaltfg/webapp-poc
 

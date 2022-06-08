@@ -8,7 +8,7 @@ image:
   repository: ui1dcristobaltfg/webapp-poc
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: "1.0.14rc1"
 
 imagePullSecrets: []
 nameOverride: "webapp"
