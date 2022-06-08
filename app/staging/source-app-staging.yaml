@@ -7,10 +7,7 @@ spec:
   interval: 1m0s
   ref:
     branch: master
-  secretRef:
-    name: flux-system
-    namespace: flux-system
-  url: ssh://git@github.com/ui1diegocristobal/TFGpoc
+  url: https://github.com/ui1diegocristobal/TFGpoc
   ignore: |
     # exclude all
     /*
