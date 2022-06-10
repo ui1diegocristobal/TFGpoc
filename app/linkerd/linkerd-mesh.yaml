@@ -22,8 +22,3 @@ spec:
         kind: HelmRepository
         name: linkerd
   interval: 60m0s
-  values:
-    identityTrustAnchorsPEM: ca.crt
-    identity.issuer.tls.crtPEM: issuer.crt
-    identity.issuer.tls.keyPEM: issuer.key
-    identity.issuer.crtExpiry: "2023-06-10T20:42:55Z"
