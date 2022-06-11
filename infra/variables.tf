@@ -11,3 +11,8 @@ variable instance_type {
     description = "Tipo de instancia de los nodos del cluster"
     default = "small"
 }
+
+variable node_count {
+    description = "Cantidad de nodos del cluster"
+    default = "4"
+}
