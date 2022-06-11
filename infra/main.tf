@@ -21,6 +21,6 @@ resource "civo_kubernetes_cluster" "main-cluster" {
     firewall_id = civo_firewall.my-firewall.id
     pools {
         size = element(data.civo_size.instance.sizes, 0).name
-        node_count = 3
+        node_count = var.node_count
     }
 }
