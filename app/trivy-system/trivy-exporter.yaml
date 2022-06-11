@@ -23,3 +23,6 @@ spec:
         name: trivy-exporter
       version: 0.4.1
   interval: 60m0s
+  values:
+    podannotations:
+      linkerd.io/inject: enabled

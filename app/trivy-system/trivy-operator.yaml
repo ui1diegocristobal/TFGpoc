@@ -23,3 +23,6 @@ spec:
         name: trivy-operator
       version: 0.0.3
   interval: 60m0s
+  values:
+    podannotations:
+      linkerd.io/inject: enabled
