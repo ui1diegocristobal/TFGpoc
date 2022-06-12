@@ -52,9 +52,11 @@ ingress:
     - host: devopsac.com
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: webapp-service
-          servicePort: 80
+          service:
+            name: webapp-service
+            port: 80
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
