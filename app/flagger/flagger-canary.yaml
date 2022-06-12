@@ -8,12 +8,12 @@ spec:
   targetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: webapp-chart-primary
+    name: webapp-chart
   # HPA reference (optional)
   autoscalerRef:
     apiVersion: autoscaling/v2beta2
     kind: HorizontalPodAutoscaler
-    name: webapp-chart-primary
+    name: webapp-chart
   # the maximum time in seconds for the canary deployment
   # to make progress before it is rollback (default 600s)
   progressDeadlineSeconds: 60
