@@ -19,9 +19,9 @@ spec:
   progressDeadlineSeconds: 60
   service:
     # ClusterIP port number
-    port: 9898
+    port: 80
     # container port number or name (optional)
-    targetPort: 9898
+    targetPort: 8080
   analysis:
     # schedule interval (default 60s)
     interval: 30s
