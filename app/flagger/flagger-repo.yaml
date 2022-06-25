@@ -23,6 +23,6 @@ spec:
         name: flagger
   interval: 60m0s
   values:
-    crd.create: true
+    crd.create: false
     meshProvider: linkerd
-    metricsServer: http://linkerd-prometheus:9090
+    metricsServer: http://prometheus.linkerd-viz:9090
